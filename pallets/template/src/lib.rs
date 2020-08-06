@@ -30,6 +30,10 @@ decl_storage! {
 		// Learn more about declaring storage items:
 		// https://substrate.dev/docs/en/knowledgebase/runtime/storage#declaring-storage-items
 		Something get(fn something): Option<u32>;
+		// Maps a nickname to whether or not it has been claimed.
+		Names get(fn names): map hasher(blake2_128_concat) Vec<u8> => bool;
+		// Maps an account ID to the nickname that account has claimed.
+		AccountNames get(fn account_names): map hasher(blake2_128_concat) T::AccountId => Vec<u8>;
 	}
 }
 
@@ -40,6 +44,8 @@ decl_event!(
 		/// Event documentation should end with an array that provides descriptive names for event
 		/// parameters. [something, who]
 		SomethingStored(u32, AccountId),
+		/// A nickname has been claimed. [nickname, claimant]
+		NameClaimed(Vec<u8>, AccountId),
 	}
 );
 
@@ -50,6 +56,8 @@ decl_error! {
 		NoneValue,
 		/// Errors should have helpful documentation associated with them.
 		StorageOverflow,
+		/// A nickname is not available because it has already been claimed.
+		NameNotAvailable,
 	}
 }
 
@@ -99,6 +107,36 @@ decl_module! {
 					Ok(())
 				},
 			}
+		}
+
+		/// Register a nickname. Will return a NameNotAvailable error if the nickname has already
+		/// been registered. Will emit a NameClaimed event on success.
+		///
+		/// The dispatch origin for this call must be Signed.
+		///
+		/// # <weight>
+		/// - `O(1)`
+		/// - 1 storage read.
+		/// - 2 storage writes.
+		/// - DB Weight:
+		///     - Read: Names
+		///     - Writes: Names, Account Names
+		/// # </weight>
+		#[weight = 10_000 + T::DbWeight::get().reads_writes(1,2)]
+		pub fn register_name(origin, name: Vec<u8>) -> dispatch::DispatchResult {
+			// Check that the dispatch was signed and get the signer.
+			let who = ensure_signed(origin)?;
+			// Check that the nickname has not already been claimed.
+			// Emit an error if the nickname has been claimed.
+			ensure!(!Names::contains_key(&name), Error::<T>::NameNotAvailable);
+
+			// Register the nickname by updating storage.
+			Names::insert(&name, true);
+			AccountNames::<T>::insert(&who, &name);
+
+			// Emit an event to report the details of the state transition.
+			Self::deposit_event(RawEvent::NameClaimed(name, who));
+			Ok(())
 		}
 	}
 }
