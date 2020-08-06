@@ -109,9 +109,6 @@ A FRAME pallet is compromised of a number of blockchain primitives:
 
 ## Workshop
 
-**_Use [the `codingearth-workshop` tag](https://github.com/danforbes/substrate-node-template/tree/codingearth-workshop)
-as the workshop's starting point; it includes the necessary dependencies._**
-
 This workshop will guide participants through the process of modifying the provided template pallet to add a new error,
 event and dispatchable, and two new storage items. Finally, the [Polkadot JS Apps UI](https://polkadot.js.org/apps), an
 important part of the Substrate ecosystem, will be used to interact with these new capabilities.
@@ -140,7 +137,8 @@ FRAME's primitive storage types (the others being
 In this workshop, byte arrays (`Vec<u8>` in Rust) are used as nicknames. In order to provide this capability, it's
 necessary to depend on the [`sp_std`](https://substrate.dev/rustdocs/v2.0.0-rc4/sp_std/index.html) module, which exposes
 the [`Vec`](https://substrate.dev/rustdocs/v2.0.0-rc4/sp_std/vec/struct.Vec.html) data type, and import it into the
-pallet implementation. With that in mind, update the
+pallet implementation. For the purposes of this workshop, the code in this repository already includes those changes.
+With that in mind, update the
 [`decl_storage!`](https://substrate.dev/rustdocs/v2.0.0-rc4/frame_support/macro.decl_storage.html) block to include the
 following storage item:
 
@@ -249,7 +247,8 @@ pub fn register_name(origin, name: Vec<u8>) -> dispatch::DispatchResult {
 ```
 
 In order to use the helpful [`ensure!`](https://substrate.dev/rustdocs/v2.0.0-rc5/frame_support/macro.ensure.html)
-macro, it's necessary to import it from the `frame_support` module.
+macro, it's necessary to import it from the `frame_support` module. For the purposes of this workshop, it has already
+been imported.
 
 Refer to the inline comments for a description of the function's logic. Note that this dispatchable function adheres to
 the important
