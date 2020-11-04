@@ -1,10 +1,10 @@
 [package]
-authors = ['Substrate DevHub <https://github.com/substrate-developer-hub>']
+authors = ['Dan Forbes <dan@parity.io>']
 edition = '2018'
-homepage = 'https://substrate.dev'
+homepage = 'https://github.com/danforbes/substrate-node-template/tree/hot-wallet'
 license = 'Unlicense'
-name = 'node-template-runtime'
-repository = 'https://github.com/substrate-developer-hub/substrate-node-template/'
+name = 'caliente-runtime'
+repository = 'https://github.com/danforbes/substrate-node-template/tree/hot-wallet'
 version = '2.0.0'
 
 [package.metadata.docs.rs]
