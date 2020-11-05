@@ -1,0 +1,3 @@
+[submodule "hot-wallet"]
+	path = hot-wallet
+	url = https://github.com/danforbes/proxy-hot-wallet.git
