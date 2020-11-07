@@ -1,8 +1,17 @@
+[![Built with Substrate v2.0.0](https://img.shields.io/badge/Substrate-v2.0.0-E6007A)](https://github.com/paritytech/substrate/releases/tag/v2.0.0)
+
 # Caliente - Substrate Hot Wallet Demonstration
 
 The purpose of this project is to demonstrate a minimal Substrate node that can be used to implement
 a secure, flexible, easy-to-use [hot wallet](https://github.com/emostov/proxy-hot-wallet#background)
 architecture :hot_pepper:
+
+The root of this repository is a project based off the
+[Substrate Developer Hub Node Template](#upstream). The repository also contains two submodules:
+
+- [`hot-wallet`](https://github.com/emostov/proxy-hot-wallet): Hot wallet demonstration code.
+- [`sidecar`](https://github.com/paritytech/substrate-api-sidecar): Custom build of the Sidecar REST
+  API service, which is a dependency of the hot wallet demonstration.
 
 ## Clone
 
@@ -16,8 +25,15 @@ git clone --recurse-submodules -j8 -b hot-wallet https://github.com/danforbes/su
 ## Makefile
 
 Refer to the included [Makefile](Makefile) to discover commands for building, testing, and
-interacting with this project. Run `make init` to set-up and verify a local development
-environment. Run `make run` to launch a local development node.
+interacting with this project. After cloning this repository, execute the following commands to
+build all dependencies and see an end-to-end hot wallet workflow in action:
+
+```sh
+# Execute each command in a separate terminal.
+make init-node
+make run-sidecar
+make run-demo
+```
 
 ## Acknowledgements & References
 

@@ -1,25 +1,25 @@
-init: toolchain build-release
+init-node: node-toolchain run-node
 
-toolchain:
+node-toolchain:
 	./scripts/init.sh
 
-check:
+check-node:
 	SKIP_WASM_BUILD= cargo check
 
-test:
+test-node:
 	SKIP_WASM_BUILD= cargo test --all
 
-run-debug:
-	WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo run -- --dev --tmp -lruntime=debug
+run-node:
+	WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo run --release -- --dev --tmp
 
-run:
-	WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo run -- --dev
+purge-node:
+	WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo run --release -- purge-chain --dev -y
 
-purge:
-	WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo run -- purge-chain --dev -y
-
-build-debug:
-	WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo build
-
-build-release:
+build-node:
 	WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo build --release
+
+run-sidecar:
+	cd ./sidecar && yarn && yarn start
+
+run-demo:
+	cd ./hot-wallet && yarn && yarn start
