@@ -1,3 +1,6 @@
 [submodule "hot-wallet"]
 	path = hot-wallet
 	url = https://github.com/danforbes/proxy-hot-wallet.git
+[submodule "sidecar"]
+	path = sidecar
+	url = https://github.com/danforbes/substrate-api-sidecar.git
