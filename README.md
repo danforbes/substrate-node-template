@@ -4,6 +4,15 @@ The purpose of this project is to demonstrate a minimal Substrate node that can 
 a secure, flexible, easy-to-use [hot wallet](https://github.com/emostov/proxy-hot-wallet#background)
 architecture :hot_pepper:
 
+## Clone
+
+Use the following command to clone this repository and all of its submodules into a directory named
+`hot-wallet-demo`:
+
+```sh
+git clone --recurse-submodules -j8 -b hot-wallet https://github.com/danforbes/substrate-node-template.git hot-wallet-demo
+```
+
 ## Makefile
 
 Refer to the included [Makefile](Makefile) to discover commands for building, testing, and
