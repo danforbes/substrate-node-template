@@ -16,7 +16,7 @@ run:
 	WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo run -- --dev
 
 purge:
-	SKIP_WASM_BUILD= cargo run -- purge-chain --dev -y
+	WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo run -- purge-chain --dev -y
 
 build-debug:
 	WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo build
