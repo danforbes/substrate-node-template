@@ -1,11 +1,11 @@
 [package]
-authors = ['Substrate DevHub <https://github.com/substrate-developer-hub>']
-description = 'FRAME pallet template for defining custom runtime logic.'
+authors = ['Dan Forbes <dan@parity.io>']
+description = 'Example pallet to explore the FRAME origin primitive.'
 edition = '2018'
-homepage = 'https://substrate.dev'
+homepage = 'https://github.com/danforbes/substrate-node-template/tree/origin'
 license = 'Unlicense'
-name = 'pallet-template'
-repository = 'https://github.com/substrate-developer-hub/substrate-node-template/'
+name = 'pallet-dumbo'
+repository = 'https://github.com/danforbes/substrate-node-template/tree/origin'
 version = '2.0.0'
 
 [package.metadata.docs.rs]
