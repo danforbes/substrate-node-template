@@ -261,9 +261,21 @@ impl pallet_sudo::Trait for Runtime {
 	type Call = Call;
 }
 
-/// Configure the Dumbo pallet in pallets/dumbo.
+frame_support::ord_parameter_types! {
+	// `subkey inspect //Dumbo`
+	pub const DumboAccountId: AccountId = AccountId::from(hex_literal::hex!["82bbaae8f01aa2170f4bdde46017845aebaf82b3b2a03899435a4bd08d456f76"]);
+}
+
 impl pallet_dumbo::Trait for Runtime {
 	type Event = Event;
+	type Call = Call;
+	type DumboAccountId = DumboAccountId;
+	type Origin = Origin;
+}
+
+impl pallet_peanut_gallery::Trait for Runtime {
+	type Event = Event;
+	type DumboOrigin = pallet_dumbo::EnsureDumbo;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
@@ -281,8 +293,8 @@ construct_runtime!(
 		Balances: pallet_balances::{Module, Call, Storage, Config<T>, Event<T>},
 		TransactionPayment: pallet_transaction_payment::{Module, Storage},
 		Sudo: pallet_sudo::{Module, Call, Config<T>, Storage, Event<T>},
-		// Include the custom logic from the Dumbo pallet in the runtime.
-		Dumbo: pallet_dumbo::{Module, Call, Storage, Event<T>},
+		Dumbo: pallet_dumbo::{Module, Call, Event, Origin},
+		PeanutGallery: pallet_peanut_gallery::{Module, Call, Event},
 	}
 );
 
