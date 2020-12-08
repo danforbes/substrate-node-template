@@ -6,6 +6,9 @@ The purpose of this project is to explore decentralized identity (DID) on Substr
 order to learn and educate. The name is a reference to the acronym SSID, which is used to refer to
 the concept of self-sovereign identity 🐨
 
+Sydney is built on the Substrate Developer Hub
+[DID pallet](https://github.com/substrate-developer-hub/pallet-did).
+
 ## Background
 
 The [Decentralized Identifier specification](https://w3c.github.io/did-core/) is maintained by the

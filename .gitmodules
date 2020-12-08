@@ -1,0 +1,3 @@
+[submodule "pallets/did"]
+	path = pallets/did
+	url = https://github.com/substrate-developer-hub/pallet-did.git

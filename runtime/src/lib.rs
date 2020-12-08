@@ -258,6 +258,13 @@ impl pallet_sudo::Trait for Runtime {
 	type Call = Call;
 }
 
+impl pallet_did::Trait for Runtime {
+  type Event = Event;
+  type Public = sp_runtime::MultiSigner;
+  type Signature = Signature;
+  type Time = pallet_timestamp::Module<Runtime>;
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub enum Runtime where
@@ -273,6 +280,7 @@ construct_runtime!(
 		Balances: pallet_balances::{Module, Call, Storage, Config<T>, Event<T>},
 		TransactionPayment: pallet_transaction_payment::{Module, Storage},
 		Sudo: pallet_sudo::{Module, Call, Config<T>, Storage, Event<T>},
+		DecentralizedIdentity: pallet_did::{Module, Call, Storage, Event<T>},
 	}
 );
 
