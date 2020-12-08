@@ -38,9 +38,6 @@ pub use frame_support::{
 	},
 };
 
-/// Import the template pallet.
-pub use pallet_template;
-
 /// An index to a block.
 pub type BlockNumber = u32;
 
@@ -92,8 +89,8 @@ pub mod opaque {
 }
 
 pub const VERSION: RuntimeVersion = RuntimeVersion {
-	spec_name: create_runtime_str!("node-template"),
-	impl_name: create_runtime_str!("node-template"),
+	spec_name: create_runtime_str!("sydney"),
+	impl_name: create_runtime_str!("sydney"),
 	authoring_version: 1,
 	spec_version: 1,
 	impl_version: 1,
@@ -261,11 +258,6 @@ impl pallet_sudo::Trait for Runtime {
 	type Call = Call;
 }
 
-/// Configure the template pallet in pallets/template.
-impl pallet_template::Trait for Runtime {
-	type Event = Event;
-}
-
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub enum Runtime where
@@ -281,8 +273,6 @@ construct_runtime!(
 		Balances: pallet_balances::{Module, Call, Storage, Config<T>, Event<T>},
 		TransactionPayment: pallet_transaction_payment::{Module, Storage},
 		Sudo: pallet_sudo::{Module, Call, Config<T>, Storage, Event<T>},
-		// Include the custom logic from the template pallet in the runtime.
-		TemplateModule: pallet_template::{Module, Call, Storage, Event<T>},
 	}
 );
 
