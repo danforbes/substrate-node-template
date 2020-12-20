@@ -1,0 +1,14 @@
+{
+  "name": "sydney-scripts",
+  "version": "0.1.0",
+  "main": "./src/index.js",
+  "license": "Unlicense",
+  "type": "module",
+  "engines": {
+    "node": ">=14",
+    "npm": ">=6"
+  },
+  "dependencies": {
+    "@polkadot/api": "^2.10.1"
+  }
+}

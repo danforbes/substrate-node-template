@@ -27,6 +27,38 @@ This project is just to learn and experiment. If you want to see what production
 identity on Substrate looks like, check out [Dock](https://www.dock.io/) and
 [KILT Protocol](https://www.kilt.io/).
 
+## Sydney DID Method Specification
+
+A [DID method](https://w3c.github.io/did-core/#dfn-did-methods) is a definition of how a specific
+[DID scheme](https://w3c.github.io/did-core/#dfn-did-schemes), or specification, must be implemented
+to work with a specific
+[verifiable data registry](https://w3c.github.io/did-core/#dfn-verifiable-data-registry), which is a
+service that enables interactions involving DIDs.
+
+### Method Name
+
+The Sydney DID scheme is identified by the method name `did:sydny`.
+
+### Method Specific ID
+
+Substrate
+[account ID](https://substrate.dev/rustdocs/v2.0.0/frame_system/trait.Trait.html#associatedtype.AccountId)s
+are used to uniquely identify Sydney identities.
+
+This means that the Sydney ID for the
+[well-known](https://substrate.dev/docs/en/knowledgebase/integrate/subkey#well-known-keys) Alice
+identity is `did:sydny:5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY`.
+
+### Method Operations
+
+This section describes the [operations](https://w3c.github.io/did-core/#method-operations) that can
+be performed on a Sydney DID document.
+
+#### Create
+
+In order to [create](https://w3c.github.io/did-core/#create) a Sydney a ID, create an attribute for
+that ID with the name `Claimed`.
+
 ## Upstream
 
 This project was forked from the
