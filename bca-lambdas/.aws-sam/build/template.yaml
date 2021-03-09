@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: bca-lambdas
+Transform:
+- AWS::Serverless-2016-10-31
+Resources:
+  createCollection:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/create-collection.handler
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: Create a new Chiba Gallery collection.
+      Policies:
+      - AWSLambdaBasicExecutionRole
+      CodeUri: createCollection

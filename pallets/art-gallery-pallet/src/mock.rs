@@ -1,4 +1,4 @@
-use crate as pallet_template;
+use crate::{self as pallet_gallery, GallerySwapAction};
 use sp_core::H256;
 use frame_support::parameter_types;
 use sp_runtime::{
@@ -17,7 +17,10 @@ frame_support::construct_runtime!(
 		UncheckedExtrinsic = UncheckedExtrinsic,
 	{
 		System: frame_system::{Module, Call, Config, Storage, Event<T>},
-		TemplateModule: pallet_template::{Module, Call, Storage, Event<T>},
+		Balances: pallet_balances::{Module, Call, Storage, Config<T>, Event<T>},
+		Nft: orml_nft::{Module, Call, Storage},
+		Gallery: pallet_gallery::{Module, Call, Storage, Event<T>},
+		AtomicSwap: pallet_atomic_swap::{Module, Call, Storage, Event<T>},
 	}
 );
 
@@ -44,15 +47,47 @@ impl system::Config for Test {
 	type BlockHashCount = BlockHashCount;
 	type Version = ();
 	type PalletInfo = PalletInfo;
-	type AccountData = ();
+	type AccountData = pallet_balances::AccountData<u64>;
 	type OnNewAccount = ();
 	type OnKilledAccount = ();
 	type SystemWeightInfo = ();
 	type SS58Prefix = SS58Prefix;
 }
 
-impl pallet_template::Config for Test {
+parameter_types! {
+	pub const ExistentialDeposit: u64 = 1;
+}
+
+impl pallet_balances::Config for Test {
+	type MaxLocks = ();
+	type Balance = u64;
 	type Event = Event;
+	type DustRemoval = ();
+	type ExistentialDeposit = ExistentialDeposit;
+	type AccountStore = System;
+	type WeightInfo = ();
+}
+
+impl orml_nft::Config for Test {
+	type ClassId = u64;
+	type TokenId = u64;
+	type ClassData = pallet_gallery::ClassData;
+	type TokenData = pallet_gallery::TokenData;
+}
+
+parameter_types! {
+	pub const ProofLimit: u32 = 10_000;
+}
+
+impl pallet_gallery::Config for Test {
+	type Event = Event;
+	type Currency = Balances;
+}
+
+impl pallet_atomic_swap::Config for Test {
+	type Event = Event;
+	type SwapAction = GallerySwapAction<Test>;
+	type ProofLimit = ProofLimit;
 }
 
 // Build genesis storage according to the mock runtime.

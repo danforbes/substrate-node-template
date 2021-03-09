@@ -39,9 +39,6 @@ pub use frame_support::{
 };
 use pallet_transaction_payment::CurrencyAdapter;
 
-/// Import the template pallet.
-pub use pallet_template;
-
 /// An index to a block.
 pub type BlockNumber = u32;
 
@@ -259,9 +256,26 @@ impl pallet_sudo::Config for Runtime {
 	type Call = Call;
 }
 
-/// Configure the template pallet in pallets/template.
-impl pallet_template::Config for Runtime {
+parameter_types! {
+	pub const ProofLimit: u32 = 10_000;
+}
+
+impl pallet_atomic_swap::Config for Runtime {
 	type Event = Event;
+	type SwapAction = pallet_gallery::GallerySwapAction<Runtime>;
+	type ProofLimit = ProofLimit;
+}
+
+impl orml_nft::Config for Runtime {
+	type ClassId = u64;
+	type TokenId = u64;
+	type ClassData = pallet_gallery::ClassData;
+	type TokenData = pallet_gallery::TokenData;
+}
+
+impl pallet_gallery::Config for Runtime {
+	type Event = Event;
+	type Currency = Balances;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
@@ -279,8 +293,9 @@ construct_runtime!(
 		Balances: pallet_balances::{Module, Call, Storage, Config<T>, Event<T>},
 		TransactionPayment: pallet_transaction_payment::{Module, Storage},
 		Sudo: pallet_sudo::{Module, Call, Config<T>, Storage, Event<T>},
-		// Include the custom logic from the template pallet in the runtime.
-		TemplateModule: pallet_template::{Module, Call, Storage, Event<T>},
+		AtomicSwap: pallet_atomic_swap::{Module, Call, Storage, Event<T>},
+		Nft: orml_nft::{Module, Call, Storage},
+		Chiba: pallet_gallery::{Module, Call, Storage, Event<T>},
 	}
 );
 
