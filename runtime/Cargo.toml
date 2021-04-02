@@ -1,11 +1,11 @@
 [package]
-authors = ['Substrate DevHub <https://github.com/substrate-developer-hub>']
+authors = ['Blockchain.art <contact@blockchain.art>']
 edition = '2018'
-homepage = 'https://substrate.dev'
+homepage = 'https://blockchain.art/'
 license = 'Unlicense'
-name = 'node-template-runtime'
+name = 'bca-runtime'
 repository = 'https://github.com/substrate-developer-hub/substrate-node-template/'
-version = '3.0.0'
+version = '0.0.0'
 
 [package.metadata.docs.rs]
 targets = ['x86_64-unknown-linux-gnu']
@@ -45,8 +45,8 @@ sp-std = { default-features = false, version = '3.0.0' }
 sp-transaction-pool = { default-features = false, version = '3.0.0' }
 sp-version = { default-features = false, version = '3.0.0' }
 
-# local dependencies
-pallet-template = { default-features = false, path = '../pallets/template', version = '3.0.0' }
+orml-nft = { default-features = false, version = '0.4.0' }
+pallet-bca = { default-features = false, path = '../pallets/bca', version = '0.0.0' }
 
 [features]
 default = ['std']
@@ -57,7 +57,7 @@ runtime-benchmarks = [
     'frame-system/runtime-benchmarks',
     'hex-literal',
     'pallet-balances/runtime-benchmarks',
-    'pallet-template/runtime-benchmarks',
+    'pallet-bca/runtime-benchmarks',
     'pallet-timestamp/runtime-benchmarks',
     'sp-runtime/runtime-benchmarks',
 ]
@@ -67,12 +67,13 @@ std = [
     'frame-support/std',
     'frame-system-rpc-runtime-api/std',
     'frame-system/std',
+	'orml-nft/std',
     'pallet-aura/std',
     'pallet-balances/std',
+    'pallet-bca/std',
     'pallet-grandpa/std',
     'pallet-randomness-collective-flip/std',
     'pallet-sudo/std',
-    'pallet-template/std',
     'pallet-timestamp/std',
     'pallet-transaction-payment-rpc-runtime-api/std',
     'pallet-transaction-payment/std',
